@@ -88,10 +88,33 @@ For optimum spell checking capabilities you can optionally install the following
 apt-get install aspell-am aspell-ar aspell-ar-large aspell-bg aspell-bn aspell-br aspell-ca aspell-cs aspell-cy aspell-da aspell-de aspell-el aspell-en aspell-eo aspell-eo-cx7 aspell-es aspell-et aspell-eu aspell-eu-es aspell-fa aspell-fo aspell-fr aspell-ga aspell-gl-minimos aspell-gu aspell-he aspell-hi aspell-hr aspell-hsb aspell-hu aspell-hy aspell-is aspell-it aspell-kk aspell-kn aspell-ku aspell-lt aspell-lv aspell-ml aspell-mr aspell-nl aspell-no aspell-or aspell-pa aspell-pl aspell-pt aspell-pt-br aspell-pt-pt aspell-ro aspell-ru aspell-sk aspell-sl aspell-sv aspell-ta aspell-te aspell-tl aspell-uk aspell-uz \
 hunspell-af hunspell-an hunspell-ar hunspell-be hunspell-bg hunspell-bn hunspell-br hunspell-bs hunspell-ca hunspell-cs hunspell-da hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-el hunspell-en-au hunspell-en-ca hunspell-en-gb hunspell-en-med hunspell-en-us hunspell-en-za hunspell-es hunspell-eu hunspell-eu-es hunspell-fr hunspell-fr-comprehensive hunspell-gd hunspell-gl hunspell-gu hunspell-he hunspell-hi hunspell-hr hunspell-hu hunspell-is hunspell-it hunspell-kk hunspell-kmr hunspell-ko hunspell-lo hunspell-lt hunspell-ml hunspell-ne hunspell-nl hunspell-no hunspell-oc hunspell-pl hunspell-pt-br hunspell-pt-pt hunspell-ro hunspell-ru hunspell-se hunspell-si hunspell-sk hunspell-sl hunspell-sr hunspell-sv hunspell-sw hunspell-te hunspell-th hunspell-tools hunspell-uk hunspell-uz hunspell-vi
 
+As we have upgraded hosting to v3 tor we need to make sure your running the correct tor version and not old version
+--------------------------------------------------------------------------------------------------------------------
+type tor -v
+Version as of today should be Tor Version 0.4.3.5 anything less then this upgrade it.
 
-Use default server password for myphpadmin when setting up, (your server root password!)
------------------------------------------------------------------------------------------
+Update Tor
+1.) nano /etc/apt/sources.list
+make sure you replace <DISTRIBUTION> with your build example for ubuntu 18.04
+  
+  deb https://deb.torproject.org/torproject.org bionic main
+  deb-src https://deb.torproject.org/torproject.org bionic main
+  
 
+  
+  Then make sure you add the key & install it:
+
+  wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+
+  gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+  
+
+apt-get update && apt-get upgrade
+
+Keep your locally installed files if asked important! [default=N] - press enter
+
+now type tor -v
+you should see Jul 06 16:09:22.187 [notice] Tor 0.4.3.5 running on Linux
 
 Create a mysql user with all permissions for our hosting management: Change the password! CHANGE_TO_YOUR_PASSWORD 
 ------------------------------------------------------------------------------------------------------------------------------------
