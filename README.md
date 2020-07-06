@@ -11,7 +11,8 @@ is to allow anyone to have a functional onion hosting server up and running with
 I would suggest running a copy of clonzilla and backing up your ubuntu installation prior to installing so you can easily
 roll back to prior in case things do not got to plan. Totally optional step.
 
-Also I would suggest if you are not locally at the terminal of the machine and using ssh to set this up that you first run the command screen so if you do lose connection you can log back in and resume where you left off.
+Also I would suggest if you are not locally at the terminal of the machine and using ssh to set this up that you first run 
+the command screen so if you do lose connection you can log back in and resume where you left off.
 
 This project is provided as is and before putting it into production you should make your own changes as needed.
 
@@ -27,7 +28,9 @@ Modified the copy and paste process to simplify.
 Installation Instructions:
 --------------------------
 ```
-The configuration was designed for ubuntu 17.04 desktop 64 bit edition installation, but also works on ubuntu 16.04.04 LTS server. 
+The configuration was designed for ubuntu 17.04 desktop 64 bit edition installation, 
+but also works on ubuntu 16.04.04 LTS server. 
+
 The following commands will install all required packages:
 
 Prior To Installation Process: Remove Apache2 & apparmor to prevent any conflicts.
