@@ -1,0 +1,5 @@
+user = hosting
+password = MY_PASSWORD
+hosts = localhost
+dbname = hosting
+query = SELECT '%d@hostingmrnkolxhi.onion' FROM users WHERE '%d' = system_account
