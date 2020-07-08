@@ -163,6 +163,10 @@ HERE ARE THE ONES TO RUN ONCE YOU EDIT THEM!
 find ./ -type f -readable -writable -exec sed -i "s/hosting.anonsite.org/CHANGE-THIS-TO-YOUR-OWN-ADDRESS/g" {} \;
 find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
 
+To get your own new onion address v3 you will need to download and compile cathugger available here:
+https://github.com/cathugger/mkp224o you can do this on your local machine to get the name or the server your choice, then upload
+the keys to the server in the steps later in /var/lib/tor/hidden_service/
+
 
 NOW ZIP THE MODIFIED FILES & COPY THE NEW ZIP FILES TO ROOT / SO YOU CAN EASILY EXTRACT AND OVERWRITE FROM ROOT DIRECTORY
 --------------------------------------------------------------------------------------------------------------------------
