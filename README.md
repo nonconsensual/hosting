@@ -306,7 +306,98 @@ apt-get update && apt-get upgrade
 Keep your locally installed files important! [default=N] - press enter
 
 now type tor -v 
+---------------------------------------------------
+
+Optional Tweaks Nginx & Cloudflare
+
+cd /etc/nginx
+nano nginx.conf
+Add between block
+        ##
+        # Basic Settings
+        ##
+<ADD HERE>
+        sendfile on;
+  
+Text to add:
+  #Added
+set_real_ip_from 103.21.244.0/22;
+set_real_ip_from 103.22.200.0/22;
+set_real_ip_from 103.31.4.0/22;
+set_real_ip_from 104.16.0.0/12;
+set_real_ip_from 108.162.192.0/18;
+set_real_ip_from 131.0.72.0/22;
+set_real_ip_from 141.101.64.0/18;
+set_real_ip_from 162.158.0.0/15;
+set_real_ip_from 172.64.0.0/13;
+set_real_ip_from 173.245.48.0/20;
+set_real_ip_from 188.114.96.0/20;
+set_real_ip_from 190.93.240.0/20;
+set_real_ip_from 197.234.240.0/22;
+set_real_ip_from 198.41.128.0/17;
+set_real_ip_from 2400:cb00::/32;
+set_real_ip_from 2606:4700::/32;
+set_real_ip_from 2803:f800::/32;
+set_real_ip_from 2405:b500::/32;
+set_real_ip_from 2405:8100::/32;
+set_real_ip_from 2c0f:f248::/32;
+set_real_ip_from 2a06:98c0::/29;
+
+# use any of the following two
+real_ip_header CF-Connecting-IP;
+#real_ip_header X-Forwarded-For;
+        ## Block spammers and other unwanted visitors  ##
+        include blockips.conf;
+        include useragent.rules;
+        #end add
+        
+-----------------------------------------------------------        
+Create Useragent block
+
+map $http_user_agent $badagent {
+     default 0;
+     ~*(adbeat_bot|ahrefsbot|ahrefssiteaudit|alexibot|appengine|aqua_products|archive.org_bot|archive|asterias|attackbot|b2w|backdoorbot|becomebot|blackwidow|blekkobot) 1;
+     ~*(blowfish|botalot|builtbottough|bullseye|bunnyslippers|ccbot|cheesebot|cherrypicker|chinaclaw|chroot|clshttp|collector) 1;
+     ~*(control|copernic|copyrightcheck|zgrab|copyscape|cosmos|craftbot|crescent|curl|custo|demon) 1;
+     ~*(disco|dittospyder|dotbot|download|downloader|dumbot|ecatch|eirgrabber|email|emailcollector) 1;
+     ~*(emailsiphon|emailwolf|enterprise_search|erocrawler|eventmachine|exabot|express|extractor|extractorpro|eyenetie) 1;
+     ~*(fairad|flaming|flashget|foobot|foto|gaisbot|getright|getty|getweb!|gigabot) 1;
+     ~*(github|go!zilla|go-ahead-got-it|go-http-client|grabnet|grafula|grub|hari|harvest|hatena|antenna|hloader) 1;
+     ~*(hmview|htmlparser|httplib|httrack|humanlinks|ia_archiver|indy|infonavirobot|interget|intraformant) 1;
+     ~*(iron33|jamesbot|jennybot|jetbot|jetcar|joc|jorgee|kenjin|keyword|larbin|leechftp) 1;
+     ~*(lexibot|library|libweb|libwww|linkextractorpro|linkpadbot|linkscan|linkwalker|lnspiderguy|looksmart) 1;
+     ~*(lwp-trivial|mass|mata|midown|miixpc|mister|mj12bot|moget|msiecrawler|naver) 1;
+     ~*(navroad|nearsite|nerdybot|netants|netmechanic|netspider|netzip|nicerspro|ninja|nutch) 1;
+     ~*(octopus|offline|openbot|openfind|openlink|pagegrabber|papa|pavuk|pcbrowser|perl) 1;
+     ~*(perman|picscout|propowerbot|prowebwalker|psbot|pycurl|pyq|pyth|python) 1;
+     ~*(python-urllib|queryn|quester|radiation|realdownload|reget|retriever|rma|rogerbot|scan|screaming|frog|seo) 1;
+     ~*(scooter|searchengineworld|searchpreview|semrush|semrushbot|semrushbot-sa|seokicks-robot|sitesnagger|smartdownload|sootle) 1;
+     ~*(spankbot|spanner|spbot|spider|stanford|stripper|sucker|superbot|superhttp|surfbot|surveybot) 1;
+     ~*(suzuran|szukacz|takeout|teleport|telesoft|thenomad|tocrawl|tool|true_robot|turingos) 1;
+     ~*(twengabot|typhoeus|url_spider_pro|urldispatcher|urllib|urly|vampire|vci|voideye|warning) 1;
+     ~*(webauto|webbandit|webcollector|webcopier|webcopy|webcraw|webenhancer|webfetch|webgo|webleacher) 1;
+     ~*(webmasterworld|webmasterworldforumbot|webpictures|webreaper|websauger|webspider|webster|webstripper|webvac|webviewer) 1;
+     ~*(webwhacker|webzip|webzip|wesee|wget|widow|woobot|www-collector-e|wwwoffle|xenu) 1;
+  }
+
+--------------------------------------------------------------------------------
+create the ipblock section
+nano blockips.conf
+
+
+#hackers
+#deny 2600:387::/27;
+#deny  2405:8100:8000:5ca1:0:0:0:0;
+#great china firewall
+deny 2405:8100:8000:5ca1::/49;
+#deny 2405:8100::/49;
+#comcast block ipv6 - spammer
+#deny 2601::/20;
+
+
+
 
 If you wish to create a email server on the system follow this guide. 
 https://workaround.org/ispmail/wheezy/
 Revision  24 Oct 2018 + Mods
+
