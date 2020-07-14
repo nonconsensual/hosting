@@ -464,4 +464,5 @@ error_page 404 =200 https://example.com/?page_id=1704;
 If you wish to create a email server on the system follow this guide. 
 https://workaround.org/ispmail/wheezy/
 Revision  24 Oct 2018 + Mods
-
+Clear sockets command if nginx refuses to start
+ rm -f /home/*/var/run/mysqld/mysqld.sock /run/nginx.sock /run/nginx/* /var/www/var/run/mysqld/mysqld.sock
