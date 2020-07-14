@@ -292,7 +292,7 @@ make sure you replace <DISTRIBUTION> with your build example for ubuntu 18.04
   deb https://deb.torproject.org/torproject.org bionic main
   deb-src https://deb.torproject.org/torproject.org bionic main
   
-
+```
   
   Then make sure you add the key & install it:
 
