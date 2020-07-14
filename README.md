@@ -393,9 +393,23 @@ deny 2405:8100:8000:5ca1::/49;
 #deny 2405:8100::/49;
 #comcast block ipv6 - spammer
 #deny 2601::/20;
+-------------------------------------------------
+add password protection to nginx
+nano /etc/nginx/sites-enabled/default
+add password text between the section of nginx default file:
+        
+        location / {
+                try_files $uri $uri/ =404;
+<Add Here>
+                location ~ \.php$ {
+  
+ Text to add:
+ 
+        auth_basic "Restricted Content";
+        auth_basic_user_file /etc/nginx/.htpasswd3;
 
-
-
+nano /etc/nginx/.htpasswd3
+paste in your passwords or create them with a tool.
 
 If you wish to create a email server on the system follow this guide. 
 https://workaround.org/ispmail/wheezy/
