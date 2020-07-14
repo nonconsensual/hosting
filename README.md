@@ -411,6 +411,56 @@ add password text between the section of nginx default file:
 nano /etc/nginx/.htpasswd3
 paste in your passwords or create them with a tool.
 
+Certain software requires modification when using a tor socket example here:
+Example
+nano /etc/tor/instances/a/torrc
+HiddenServiceDir /var/lib/tor-instances/a/hidden_service_axohim3ghxe6akvj.onion/
+HiddenServiceNumIntroductionPoints 3
+HiddenServiceVersion 2
+HiddenServiceMaxStreamsCloseCircuit 1
+HiddenServiceMaxStreams 20
+HiddenServicePort 80 unix:/var/run/nginx/anonim2lxxe6akvj.onion
+HiddenServicePort 25
+-----------------------------------------------------
+
+HiddenServiceDir /var/lib/tor-instances/a/hidden_service_axohim3ghxe6akvj.onion/
+HiddenServiceNumIntroductionPoints 3
+HiddenServiceVersion 2
+HiddenServiceMaxStreamsCloseCircuit 1
+HiddenServiceMaxStreams 20
+HiddenServicePort 80 127.0.0.1:80   <<<<<change to this
+HiddenServicePort 25 127.0.0.1:25
+-----------------------------------------------
+now change the nginx file
+nano /etc/nginx/sites-enabled/axohim3ghxe6akvj.onion
+this is how it should look after changes
+server {
+        listen [::]:80;
+        listen unix:/var/run/nginx/axohim3ghxe6akvj;
+#listen unix:/run/https+.pp proxy_protocol;
+set_real_ip_from unix:;
+real_ip_header proxy_protocol;
+        root /home/example.com;
+        server_name axohim3ghxe6akvj.onion;
+        access_log /var/log/nginx/access_axohim3ghxe6akvj.onion.log custom;
+        access_log /home/axohim3ghxe6akvj.onion/logs/access.log custom;
+        error_log /var/log/nginx/error_axohim3ghxe6akvj.onion.log notice;
+        error_log /home/axohim3ghxe6akvj.onion/logs/error.log notice;
+#added redirect page not found to homepage
+error_page 404 =200 https://example.com/?page_id=1704;
+        disable_symlinks on from=/home/axohim3ghxe6akvj.onion/www;
+        autoindex off;
+        location / {
+                try_files $uri $uri/ =404;
+                location ~ [^/]\.php(/|$) {
+                        include snippets/fastcgi-php.conf;
+#                       fastcgi_pass unix:/run/php/axohim3ghxe6akvj;
+                        fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+                }
+
+        }
+}
+
 If you wish to create a email server on the system follow this guide. 
 https://workaround.org/ispmail/wheezy/
 Revision  24 Oct 2018 + Mods
