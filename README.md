@@ -466,3 +466,9 @@ https://workaround.org/ispmail/wheezy/
 Revision  24 Oct 2018 + Mods
 Clear sockets command if nginx refuses to start
  rm -f /home/*/var/run/mysqld/mysqld.sock /run/nginx.sock /run/nginx/* /var/www/var/run/mysqld/mysqld.sock
+
+If you get a map hash error add this code in nginx.conf
+http {
+map_hash_bucket_size 128;
+        ##
+        # Basic Settings
