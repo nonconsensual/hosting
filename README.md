@@ -168,8 +168,11 @@ make sure you have already issued the sudo -i command and are in the hosting-mas
 Then run the find commands as per examples but change them to your own names and onions like my examples.
 
 HERE ARE THE ONES TO RUN ONCE YOU EDIT THEM!
-
+Run the first one at this point and then after you have update tor and rebooted you need to find the onion address and update that.
+Part 1
 find ./ -type f -readable -writable -exec sed -i "s/hosting.anonsite.org/CHANGE-THIS-TO-YOUR-OWN-ADDRESS/g" {} \;
+
+Part 2 do not run this yet wait till after reboot
 find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
 
 To get your own new onion address v3 you will need to download and compile cathugger available here:
@@ -204,6 +207,8 @@ use option - All overwite!
 
 sudo reboot
 
+sudo -i 
+screen
 
 Now we will display the new onion name that was just created and change it to our vannity address.
 --------------------------------------------------------------------------------------------------
@@ -212,6 +217,13 @@ Now there should be an onion domain in /var/lib/tor/hidden_service/hostname:
 ----------------------------------------------------------------------------
 cat /var/lib/tor/hidden_service/hostname
 
+you now have your new onion v3 address.
+
+cd /var/www/
+
+Part 2 now (CHANGE-THIS-TO-YOUR-OWN-ONION) to your onion address 
+
+find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
 
 Now run all this from command line as root.
 --------------------------------------------
