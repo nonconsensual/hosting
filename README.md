@@ -224,6 +224,10 @@ cd /var/www/
 Part 2 now (CHANGE-THIS-TO-YOUR-OWN-ONION) to your onion address 
 
 find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
+now cd /etc/nginx/sites-enabled
+run this again
+find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
+now type service nginx restart
 
 Now run all this from command line as root.
 --------------------------------------------
