@@ -80,6 +80,10 @@ phpmyadmin php-apcu php-gnupg php-imagick sasl2-bin ssh subversion tor vsftpd &&
 
 Optional If you want a more secure setup remove phpmyadmin / adminer from the list above.
 
+Install PDO module latest php - needed for 18.04 LTS to setup database
+
+sudo apt-get install php-mysql
+
 Optional Experimental with php7.4
 apt-get --no-install-recommends install apt-transport-tor aspell curl dovecot-imapd dovecot-pop3d git dnsmasq haveged hunspell iptables locales-all logrotate mariadb-server nginx-light postfix postfix-mysql \
 php7.0-bcmath php7.0-bz2 php7.0-cli php7.0-curl php7.0-dba php7.0-enchant php7.0-fpm php7.0-gd php7.0-gmp php7.0-imap php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-opcache php7.0-pspell php7.0-readline php7.0-recode php7.0-soap php7.0-sqlite3 php7.0-tidy php7.0-xml php7.0-xmlrpc php7.0-xsl php7.0-zip \
@@ -108,15 +112,14 @@ make sure you replace <DISTRIBUTION> with your build example for ubuntu 18.04
   
   deb https://deb.torproject.org/torproject.org bionic main
   deb-src https://deb.torproject.org/torproject.org bionic main
-  
-
-  
+    
   Then make sure you add the key & install it:
 
   wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
 
   gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
   
+If you get an error on these tor hosts means your web host has blocked tor so find another hosting firm not worth asking them why.
 
 apt-get update && apt-get upgrade
 
@@ -170,10 +173,19 @@ Then run the find commands as per examples but change them to your own names and
 HERE ARE THE ONES TO RUN ONCE YOU EDIT THEM!
 Run the first one at this point and then after you have update tor and rebooted you need to find the onion address and update that.
 Part 1
-find ./ -type f -readable -writable -exec sed -i "s/hosting.anonsite.org/CHANGE-THIS-TO-YOUR-OWN-ADDRESS/g" {} \;
+find ./ -type f -readable -writable -exec sed -i "s/hosting.anonsite.org/CHANGE-THIS-TO-YOUR-OWN-DOMAIN/g" {} \;
+find ./ -type f -readable -writable -exec sed -i "s/anonsite.i2p/XXXYOUR-IP2-HEREXXX/g" {} \;
+find ./ -type f -readable -writable -exec sed -i "s/AnonSite/XXXYOUR-NAME-HEREXXX/g" {} \;
 
-Part 2 do not run this yet wait till after reboot
+Now to get your unique new onoin v3 domain type the following from the torhosting-master folder
+cp etc/tor/torrc /etc/tor/torrc
+service tor restart
+cat /var/lib/tor/hidden_service/hostname
+Make a note of the onion address and copy it to part 2 then issue the find command.
+
+Part 2 
 find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
+
 
 To get your own new onion address v3 you will need to download and compile cathugger available here:
 https://github.com/cathugger/mkp224o you can do this on your local machine to get the name or the server your choice, then upload
