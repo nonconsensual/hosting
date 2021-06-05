@@ -76,9 +76,9 @@ php7.0-bcmath php7.0-bz2 php7.0-cli php7.0-curl php7.0-dba php7.0-enchant php7.0
 php7.1-bcmath php7.1-bz2 php7.1-cli php7.1-curl php7.1-dba php7.1-enchant php7.1-fpm php7.1-gd php7.1-gmp php7.1-imap php7.1-intl php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-pspell php7.1-readline php7.1-recode php7.1-soap php7.1-sqlite3 php7.1-tidy php7.1-xml php7.1-xmlrpc php7.1-xsl php7.1-zip \
 php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-curl php7.2-dba php7.2-enchant php7.2-fpm php7.2-gd php7.2-gmp php7.2-imap php7.2-intl php7.2-json php7.2-mbstring php7.2-mysql php7.2-opcache php7.2-pspell php7.2-readline php7.2-recode php7.2-soap php7.2-sqlite3 php7.2-tidy php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-zip \
 php7.3-bcmath php7.3-bz2 php7.3-cli php7.3-curl php7.3-dba php7.3-enchant php7.3-fpm php7.3-gd php7.3-gmp php7.3-imap php7.3-intl php7.3-json php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-pspell php7.3-readline php7.3-recode php7.3-soap php7.3-sqlite3 php7.3-tidy php7.3-xml php7.3-xmlrpc php7.3-xsl php7.3-zip \
-phpmyadmin php-apcu php-gnupg php-imagick sasl2-bin ssh subversion tor vsftpd && apt-get --no-install-recommends install adminer
+phpmyadmin php-apcu php-gnupg php-imagick sasl2-bin ssh subversion tor vsftpd && apt-get --no-install-recommends install composer
 
-Optional If you want a more secure setup remove phpmyadmin / adminer from the list above.
+Optional If you want a more secure setup remove phpmyadmin / add adminer from in list above.
 
 Install PDO module latest php - needed for 18.04 LTS to setup database
 
@@ -221,25 +221,6 @@ sudo reboot
 
 sudo -i 
 screen
-
-Now we will display the new onion name that was just created and change it to our vannity address.
---------------------------------------------------------------------------------------------------
-
-Now there should be an onion domain in /var/lib/tor/hidden_service/hostname:
-----------------------------------------------------------------------------
-cat /var/lib/tor/hidden_service/hostname
-
-you now have your new onion v3 address.
-
-cd /var/www/
-
-Part 2 now (CHANGE-THIS-TO-YOUR-OWN-ONION) to your onion address 
-
-find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
-now cd /etc/nginx/sites-enabled
-run this again
-find ./ -type f -readable -writable -exec sed -i "s/hostingmrnkolxhi.onion/CHANGE-THIS-TO-YOUR-OWN-ONION/g" {} \;
-now type service nginx restart
 
 Now run all this from command line as root.
 --------------------------------------------
@@ -500,3 +481,30 @@ http {
 map_hash_bucket_size 128;
         ##
         # Basic Settings
+                                               
+NOTES: 
+                                              
+memory exausted ?
+nano /etc/php/7.1/fpm/php.ini                               
+nano /etc/php/7.1/cli/php.ini
+; Maximum amount of memory a script may consume (128MB)
+; http://php.net/memory-limit
+       ;memory_limit = -1   
+       memory_limit = 4G
+; Maximum amount of memory a script may consume (128MB)
+; http://php.net/memory-limit
+; memory_limit = 128M
+memory_limit = 4G
+
+MAX FILES PHP
+these directives in a php.ini file in your Drupal root directory.
+nano 
+/etc/php/7.3/fpm/php.ini
+/etc/php/7.3/cli/php.ini
+    upload_max_filesize = 10G
+    post_max_size = 10G
+
+
+root@x:~# /etc/init.d/php7.3-fpm restart
+[ ok ] Restarting php7.3-fpm (via systemctl): php7.3-fpm.service.                                               
+                                               
