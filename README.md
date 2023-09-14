@@ -64,9 +64,9 @@ sudo apt update && sudo apt upgrade
 sudo apt-get install nano
 sudo apt-get install apt-transport-https lsb-release ca-certificates
 sudo apt update && sudo apt upgrade
-sudo apt-get install python-software-properties software-properties-common
+sudo apt-get install python3-software-properties software-properties-common
 sudo apt --fix-broken install python-pycurl python-apt - Ubuntu 18.04 
-
+sudo apt --fix-broken install python3-pycurl python3-apt Ubuntu 22.04
 sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 sudo apt update && sudo apt upgrade
 (If you have problems with dependancies I have included a /etc/apt/sources.list just update yours to match on ubuntu 16.04.LTS - It is located in optional directory then run sudo apt update && sudo apt upgrade, and continue to install)
